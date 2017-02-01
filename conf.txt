@@ -1,5 +1,3 @@
-remove_rare
-stem
 bag_of_function_words
 bag_of_pos_trigrams
 bag_of_pos_bigrams
