@@ -30,12 +30,12 @@ feature\_extractor.py is a collection of functions to extract various features f
 
 * __Preprocessing__: before extracting features, stem all words and replace any that appear only once with the token <RARE>. __This preprocessing step has been implemented for you.__
 
-Then, using the bawe\_gender\_classifier.py script, get the gender detection accuracy using each individual feature set, as well as all the features combined. Fill out the submission.md worksheet.
+Then, using the bawe\_gender\_classifier.py script, get the gender detection accuracy using each individual feature set, as well as all the features combined. Fill out the accuracy table and discussion question in the pull request template (see below).
 
 See <http://www.nyu.edu/projects/politicsdatalab/localdata/workshops/NLTK_presentation%20_code.py> for excellent focused nltk tutorial.
 
 ### Github workflow for submission (beta)
 
-We will use the [fork and pull request](https://guides.github.com/activities/forking/)  workflow for submissions for this class. Follow the link for a guide to this workflow. The idea is that you will fork this repository, make the required changes in your own copy, and then submit a pull request and @mention me (@rivlev). __The pull request and @mention comprise your submission for this assignment.__ I will look at your feature\_extractor.py and submission.md.
+We will use the [fork and pull request](https://guides.github.com/activities/forking/)  workflow for submissions for this class. Follow the link for a guide to this workflow. The idea is that you will fork this repository, make the required changes in your own copy, and then submit a pull request and @mention me (@rivlev). __The pull request and @mention comprise your submission for this assignment.__ I will look at your feature\_extractor.py and the body of the pull request.
 
-This setup for this class is new, so please submit a separate pull request if you can clear up any errors or lack of clarity here. 
+This setup for this class is new, so please open an issue if you have any questions or run into bugs.

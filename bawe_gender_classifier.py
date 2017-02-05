@@ -26,7 +26,7 @@ def load_essays(gender_dict):
 	students = []
 	for student, gender in gender_dict.items():
 		with open('%s/%s.txt' % (datadir, student)) as f:
-			text = f.read()
+			text = f.read().decode('utf-8')
 			text = re.sub('<[^<]+?>', '', text)		# remove vestigial xml
 			essays.append(text)
 			genderlabels.append(gender)
