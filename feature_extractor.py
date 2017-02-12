@@ -19,22 +19,12 @@ def preprocess():
 	# stem
 	porter = nltk.PorterStemmer()
 	global stemmed_text
-#	stemmed_text = [[porter.stem(t) for t in tokens] for tokens in tokenized_text]
-	for tokens in tokenized_text: # iterating instead of list comprehension to allow exception handling
-		stemmed_line = []
-		for t in tokens:			
-			try:
-				stemmed_line.extend(porter.stem(t))
-			except IndexError:
-				stemmed_line.extend('')
-		stemmed_text.append(stemmed_line)
+	stemmed_text = [[porter.stem(t) for t in tokens] for tokens in tokenized_text]
 
 	# remove rare
-#	vocab = nltk.FreqDist(w for w in line for line in stemmed_text)
 	vocab = nltk.FreqDist(w for line in stemmed_text for w in line)
-	rarewords_list = vocab.hapaxes()
-	rarewords_regex = re.compile(r'\b(%s)\b' % '|'.join(rarewords_list))
-	stemmed_text = [[rarewords_regex.sub('<RARE>', w) for w in line] for line in stemmed_text]
+	rarewords_list = set(vocab.hapaxes())
+	stemmed_text = [['<RARE>' if w in rarewords_list else w for w in line] for line in stemmed_text]
 	# note that source_text will be lowercased, but only stemmed_text will have rare words removed
 
 def bag_of_function_words():
