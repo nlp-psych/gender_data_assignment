@@ -26,7 +26,7 @@ def load_essays(gender_dict):
 	students = []
 	for student, gender in gender_dict.items():
 		with open('%s/%s.txt' % (datadir, student)) as f:
-			text = f.read().decode('utf-8')
+			text = f.read()
 			text = re.sub('<[^<]+?>', '', text)		# remove vestigial xml
 			essays.append(text)
 			genderlabels.append(gender)
@@ -47,4 +47,8 @@ if __name__ == "__main__":
 	conf = load_conf_file()
 	features = fe.extract_features(essays, conf)
 
-	print (predict_gender(features, genderlabels))
+	score = predict_gender(features, genderlabels)
+	print(score)
+
+	with open('experiments.csv', 'a') as f:
+		f.write(",".join('{:%Y-%m-%d,%H:%M:%S}'.format(datetime.datetime.now()), "|".join(conf), score))
