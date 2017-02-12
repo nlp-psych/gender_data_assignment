@@ -6,6 +6,7 @@ import feature_extractor as fe
 import numpy
 import re
 import sys
+import datetime
 
 datadir = sys.argv[1]
 genderlabfile = datadir + "/BAWE_balanced_subset.csv"
@@ -51,4 +52,4 @@ if __name__ == "__main__":
 	print(score)
 
 	with open('experiments.csv', 'a') as f:
-		f.write(",".join('{:%Y-%m-%d,%H:%M:%S}'.format(datetime.datetime.now()), "|".join(conf), score))
+		f.write(",".join(('{:%Y-%m-%d,%H:%M:%S}'.format(datetime.datetime.now()), "|".join(conf), str(score))))
