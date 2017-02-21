@@ -3,6 +3,7 @@
 import nltk
 import numpy
 import re
+import csv
 
 source_text = []
 stemmed_text = []
@@ -32,9 +33,15 @@ def bag_of_function_words():
 	for sw in nltk.corpus.stopwords.words('english'):
 		counts = [sum(1 for _ in re.finditer(r'\b%s\b' % sw, line)) for line in source_text]
 		bow.append(counts)
-	return bow	
+	return bow, nltk.corpus.stopwords.words('english')
 
 # FILL IN OTHER FEATURE EXTRACTORS
+
+def log(fvec, hvec):
+	with open('log.csv', 'a') as lfile:
+		lwriter = csv.writer(lfile)
+		lwriter.writerow(hvec)
+		lwriter.writerows(fvec)
 
 def extract_features(text, conf):
 	all = False
@@ -46,12 +53,21 @@ def extract_features(text, conf):
 	preprocess()
 
 	features = []		# features will be list of lists, each component list will have the same length as the list of input text
+	header = []
 
 
 	# extract requested features: FILL IN HERE
 	if 'bag_of_function_words' in conf or all:
-		features.extend(bag_of_function_words())
+		fvec, hvec = bag_of_function_words()
+		features.extend(fvec)
+		header.extend(hvec)
+		log(fvec, hvec)
 
 	features = numpy.asarray(features).T.tolist() # transpose list of lists sow its dimensions are #instances x #features
+
+	with open('features.csv', 'w') as ffile:
+		fwriter = csv.writer(ffile)
+		fwriter.writerow(header)
+		fwriter.writerows(features)
 
 	return features
