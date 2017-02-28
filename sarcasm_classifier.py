@@ -13,7 +13,7 @@ conffile = sys.argv[1]
 
 ndata = -1 # for testing feature extraction: optional arg to control how much of data to use. won't work for testing classification because it just takes the first n -- all one class
 if len(sys.argv) > 2:
-	ndata = sys.argv[2]
+	ndata = int(sys.argv[2])
 
 def load_data():
 	with open(datafile) as f:
